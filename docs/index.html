@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,20 +9,95 @@
     <!-- <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'> -->
     <link rel="stylesheet" href="simple-calendar.css">
     <link rel="stylesheet" href="demo.css">
+
+    <link rel="stylesheet" href="lib/prism.css">
+
+    <link
+    rel="stylesheet"
+    href="https://unpkg.com/tippy.js@4/themes/light-border.css"
+  />
+
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/tippy.js@4/themes/translucent.css"
+  />
+
+    <script src="https://unpkg.com/popper.js@1/dist/umd/popper.min.js"></script>
+    <script src="https://unpkg.com/tippy.js@4"></script>
 </head>
+
 <body>
+    <!-- Github Ribbon Code -->
+    <a href="https://github.com/monsterbrain/simple-calendar"><img
+            style="position: absolute; top: 0; left: 0; border: 0;"
+            src="https://s3.amazonaws.com/github/ribbons/forkme_left_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+
+    <!-- Simple Calendar Basic Usage Demo -->
     <h1 class="title">Simple Calendar</h1>
-    <div id="container" class="calendar-container"></div>
-    
+    <hr class="title" style="width: 240px;">
+    <p class="title subtitle">a Simple Jquery Calendar Plugin</p>
+    <div id="container" class="calendar-container" data-tippy-content="content tip"></div>
+
+
+    <h1 class="title">Basic Usage</h1>
+    <div class="code-div">
+        <pre><code class="language-js">$(document).ready(function(){
+            $("#container").simpleCalendar();
+        });</code></pre>
+    </div>
+
+    <hr class="title" style="width: 480px;">
+
+    <!-- Events Calendar Demo -->
+    <h1 class="title">Demo with events added</h1>
+    <h4 class="title">(Tooltips added with <a href="https://atomiks.github.io/tippyjs/">Tippy.js</a>)</h4>
+    <div id="event-cal-container" class="calendar-container"></div>
+
+    <h1 class="title">Code</h1>
+    <div class="code-div">
+        <pre><code class="language-js">$("#event-cal-container").simpleCalendar({
+        fixedStartDay: false,
+        // event dates
+        events: ['2019-03-04', '2019-03-08', '2019-03-12', '2019-03-15'],
+        // event info to show
+        eventsInfo: ['John\'s Birthday', 'Janet\'s Marriage','Graduation Day', 'Final Exams !'],
+        selectCallback: function(date){
+            console.log('date selected '+date);
+        }
+    });
+
+    // add tooltips for the event days only.
+    tippy('.day.event', {
+        theme: 'translucent',
+    });</code></pre>
+    </div>
+
     <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script> -->
     <script src="jquery-2.1.4.min.js"></script>
     <script src="jquery.simple-calendar.js"></script>
+    <script src="lib/prism.js"></script>
     <script>
-        $(document).ready(function(){
-            $("#container").simpleCalendar({
+        $(document).ready(function () {
+            var cal = $("#container").simpleCalendar({
                 fixedStartDay: false
+                
+            });
+
+            // Event Demo init
+            $("#event-cal-container").simpleCalendar({
+                fixedStartDay: false,
+                events: ['2019-03-04', '2019-03-08', '2019-03-12', '2019-03-15'],
+                eventsInfo: ['John\'s Birthday', 'Janet\'s Marriage','Graduation Day', 'Final Exams !'],
+                selectCallback: function(date){
+                    console.log('date selected '+date);
+                }
+            });
+
+            tippy('.day.event', {
+                theme: 'translucent',
             });
         });
     </script>
 </body>
+
 </html>

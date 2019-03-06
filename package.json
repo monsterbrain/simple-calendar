@@ -9,7 +9,7 @@
   "keywords": [
     "image"
   ],
-  "author": "Nikolai Fischer",
+  "author": "Benoit Rospars (@benuuts), Nikolai Fischer",
   "license": "BSD-2-Clause",
   "devDependencies": {
     "gulp": "^3.9.1",

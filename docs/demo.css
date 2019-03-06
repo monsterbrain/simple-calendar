@@ -9,8 +9,19 @@ body {
     text-align: center;
 }
 
+.subtitle{
+    color: rgb(80, 80, 80);
+    font-size: 1.2rem;
+    margin-top: 0.45rem;
+}
+
 .calendar-container{
     position: relative;
     margin: 50px auto;
     max-width: 500px;
+}
+
+.code-div{
+    margin: 16px auto;
+    max-width: 700px;
 }
