@@ -6,32 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Calendar</title>
-    <!-- <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'> -->
+    
     <link rel="stylesheet" href="simple-calendar.css">
     <link rel="stylesheet" href="demo.css">
 
     <link rel="stylesheet" href="lib/prism.css">
 
-    <link
-    rel="stylesheet"
-    href="https://unpkg.com/tippy.js@4/themes/light-border.css"
-  />
-
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/tippy.js@4/themes/translucent.css"
-  />
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@4/themes/light-border.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@4/themes/translucent.css"/>
 
     <script src="https://unpkg.com/popper.js@1/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@4"></script>
 </head>
 
 <body>
-    <!-- Github Ribbon Code -->
-    <a href="https://github.com/monsterbrain/simple-calendar"><img
-            style="position: absolute; top: 0; left: 0; border: 0;"
-            src="https://s3.amazonaws.com/github/ribbons/forkme_left_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
-
     <!-- Simple Calendar Basic Usage Demo -->
     <h1 class="title">Simple Calendar</h1>
     <hr class="title" style="width: 240px;">
@@ -49,16 +37,18 @@
     <hr class="title" style="width: 480px;">
 
     <!-- Events Calendar Demo -->
-    <h1 class="title">Demo with events added</h1>
+    <h1 class="title">Demo with eventDates added (with callbacks)</h1>
     <h4 class="title">(Tooltips added with <a href="https://atomiks.github.io/tippyjs/">Tippy.js</a>)</h4>
     <div id="event-cal-container" class="calendar-container"></div>
+
+    <h2 class="title" id="selected-date-text"></h2>
 
     <h1 class="title">Code</h1>
     <div class="code-div">
         <pre><code class="language-js">$("#event-cal-container").simpleCalendar({
         fixedStartDay: false,
         // event dates
-        events: ['2019-03-04', '2019-03-08', '2019-03-12', '2019-03-15'],
+        eventDates: ['2019-03-04', '2019-03-08', '2019-03-12', '2019-03-15'],
         // event info to show
         eventsInfo: ['John\'s Birthday', 'Janet\'s Marriage','Graduation Day', 'Final Exams !'],
         selectCallback: function(date){
@@ -77,19 +67,48 @@
     <script src="jquery.simple-calendar.js"></script>
     <script src="lib/prism.js"></script>
     <script>
+        var formatDate = function (date) {
+            var day = '' + date.getDate(),
+                month = '' + (date.getMonth() + 1),
+                year = date.getFullYear();
+
+            if (month.length < 2) month = '0' + month;
+            if (day.length < 2) day = '0' + day;
+
+            return [year, month, day].join('-');
+        }
+
         $(document).ready(function () {
             var cal = $("#container").simpleCalendar({
                 fixedStartDay: false
                 
             });
 
+            // dynamically add event dates, to show them up in every months calendar
+            // for demo purposes only
+            var date = new Date(); // today
+
+            var eventDates = []
+            date.setDate(4)
+            eventDates.push(formatDate(new Date(date)))
+            date.setDate(8)
+            eventDates.push(formatDate(new Date(date)))
+            date.setDate(12)
+            eventDates.push(formatDate(new Date(date)))
+            date.setDate(15)
+            eventDates.push(formatDate(new Date(date)))
+
+            var timeoutId = -1;
             // Event Demo init
             $("#event-cal-container").simpleCalendar({
                 fixedStartDay: false,
-                events: ['2019-03-04', '2019-03-08', '2019-03-12', '2019-03-15'],
+                events: eventDates,
                 eventsInfo: ['John\'s Birthday', 'Janet\'s Marriage','Graduation Day', 'Final Exams !'],
                 selectCallback: function(date){
                     console.log('date selected '+date);
+                    clearTimeout(timeoutId)
+                    $('#selected-date-text').text('clicked on '+date);
+                    timeoutId = setTimeout(()=>$('#selected-date-text').text(''), 2500);
                 }
             });
 
@@ -98,6 +117,11 @@
             });
         });
     </script>
+
+    <!-- Github Ribbon Code -->
+    <a href="https://github.com/monsterbrain/simple-calendar">
+        <img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_gray_6d6d6d.png" alt="Fork me on GitHub">
+    </a>
 </body>
 
 </html>

@@ -41,6 +41,7 @@
             var calendar = $('<div class="calendar"></div>');
             var header = $('<header>' +
                 '<h2 class="month"></h2>' +
+                '<h4 class="month year"></h4>'+
                 '<a class="btn btn-prev" href="#"><</a>' +
                 '<a class="btn btn-next" href="#">></a>' +
                 '</header>');
@@ -57,6 +58,7 @@
         //Update the current month header
         updateHeader: function (date, header) {
             header.find('.month').html(this.settings.months[date.getMonth()]);
+            header.find('.year').html(date.getFullYear());
         },
 
         testFunction: function (temp) {
@@ -102,7 +104,7 @@
 
                 //For each row
                 for (var i = 0; i < 7; i++) {
-                    var td = $('<td><a href="#" class="day">' + day.getDate() + '</a></td>');
+                    var td = $('<td><a href="#" class="day" data-date="'+ this.formatToYYYYMMDD(day) + '">' + day.getDate() + '</a></td>');
 
 
                     if (plugin.settings.displayEvent) {
@@ -132,22 +134,21 @@
             }
 
             tbody.on('click', '.day', function (e) {
-                var day = '' + $(e.currentTarget).text(),
-                    month = '' + (plugin.currentDate.getMonth() + 1),
-                    year = plugin.currentDate.getFullYear();
+                // previous method - just kept here for reference
+                // var day = '' + $(e.currentTarget).text(),
+                //     month = '' + (plugin.currentDate.getMonth() + 1),
+                //     year = plugin.currentDate.getFullYear();
+                // const selectedDate = [year, month, day].join('-');
 
-                if (month.length < 2) month = '0' + month;
-                if (day.length < 2) day = '0' + day;
-
-                const selectedDate = [year, month, day].join('-');
-
-                plugin.settings.selectCallback(selectedDate);
+                var dayDate = $(e.currentTarget).attr('data-date')
+                console.log(dayDate);
+                plugin.settings.selectCallback(dayDate);
 
                 if ($(e.currentTarget).hasClass('event')) {
                     // show event container with effect
                     plugin.fillUp($(plugin.element), e.pageX, e.pageY);
-                    const eventIndex = $.inArray(selectedDate, plugin.events);
-                    $(plugin.element).find('.event-container>.event-date').text(selectedDate);
+                    const eventIndex = $.inArray(dayDate, plugin.events);
+                    $(plugin.element).find('.event-container>.event-date').text(dayDate);
                     $(plugin.element).find('.event-container>.title').text(plugin.settings.eventsInfo[eventIndex]);
                 }
                 e.preventDefault();

@@ -1,4 +1,7 @@
 .calendar {
+  border: 1px solid #cccccc;
+    border-radius: 16px;
+    padding: 1rem;
   position: relative;
   overflow: hidden;
   text-transform: capitalize;
@@ -22,14 +25,17 @@
     background: #CBD1D2;
     color: white; }
   .calendar header .btn-prev {
-    left: 0;
-    top: 0; }
+    left: 28px;
+    top: 12px; }
   .calendar header .btn-next {
-    right: 0;
-    top: 0; }
+    right: 28px;
+    top: 12px; }
   .calendar header .month {
     padding: 0;
     margin: 0; }
+    .calendar header .month .year{
+      padding: 0;
+      margin: 0; }
   .calendar table {
     width: 100%;
     margin: 20px 0;
@@ -52,8 +58,11 @@
     background: #6691CC;
     color: white; }
   .calendar .day.event {
-    background: #6691CC;
-    color: white; }
+    color: rgb(26, 26, 26);
+    border: 2px solid #f77721; }
+  .calendar .day.event:hover {
+    color: rgb(22, 23, 24);
+    border: 2px solid #ffab2e; }
   .calendar .day.wrong-month {
     color: #CBD1D2; }
   .calendar .day.wrong-month:hover {
@@ -65,6 +74,7 @@
     left: 0;
     width: 100%;
     height: 100%;
+    color: white;
     background: #545A5C; }
   .calendar .filler {
     position: absolute;
@@ -73,3 +83,34 @@
     border-radius: 50%;
     background: #545A5C;
     transform: translate(-50%, -50%); }
+
+    /* Event Close button - ref : https://codepen.io/brissmyr/pen/egidw */
+    .event-container>p{
+      margin-top: 35%;
+      font-size: 1.2rem;
+    }
+    .event-container>.close {
+      position: absolute;
+      right: 32px;
+      top: 32px;
+      width: 32px;
+      height: 32px;
+      opacity: 0.3;
+    }
+    .event-container>.close:hover {
+      opacity: 1;
+    }
+    .event-container>.close:before, .event-container>.close:after {
+      position: absolute;
+      left: 15px;
+      content: ' ';
+      height: 33px;
+      width: 2px;
+      background-color: rgb(235, 235, 235);
+    }
+    .event-container>.close:before {
+      transform: rotate(45deg);
+    }
+    .event-container>.close:after {
+      transform: rotate(-45deg);
+    }
