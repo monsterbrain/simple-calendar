@@ -26,6 +26,9 @@ $(document).ready(function(){
 });
 ```
 
+### Events Preview
+![preview](demo/event-preview.gif)
+
 This initialize the calendar with its default settings.
 
 ### Usage with options
