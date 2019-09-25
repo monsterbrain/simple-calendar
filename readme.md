@@ -58,3 +58,4 @@ $(document).ready(function(){
 - 2019 September 25
 > Fixed Date callback bug fix (thanks to **Franco Vilotta**)
 > Added Year
+> changed demo screen shot
