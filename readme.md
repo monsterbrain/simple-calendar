@@ -1,5 +1,5 @@
 # Simple Calendar
-![preview](demo/screenshot.jpg)
+![preview](demo/event-preview.gif)
 
 A simple and easy plugin to create a calendar and add events to it.
 
@@ -41,14 +41,20 @@ $(document).ready(function(){
         //Defaults options below
         //string of months starting from january
         months: ['january','february','march','april','may','june','july','august','september','october','november','december'], //string of months starting from january
-        days: ['sunday','monday','tuesday','wenesday','thursday','friday','saturday'], //string of days starting from sunday
+        days: ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'], //string of days starting from sunday
         minDate : "YYYY-MM-DD", // minimum date
         maxDate : "YYYY-MM-DD", // maximum date
         insertEvent: true, // can insert events
         displayEvent: true, // display existing event
         fixedStartDay: true, // Week begin always by monday
-        events: [], //List of event
+        events: [], //List of events
+        selectCallback: function (selDate) { }, // Callback on date select
         insertCallback : function(){} // Callback when an event is added to the calendar
     });
 });
 ```
+
+## updates
+- 2019 September 25
+> Fixed Date callback bug fix (thanks to **Franco Vilotta**)
+> Added Year
